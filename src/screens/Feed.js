@@ -1,40 +1,50 @@
-import React, {Component} from 'react'
-import {StyleSheet, FlatList, View} from 'react-native'
-import { connect } from 'react-redux'
-import Header from '../components/Header'
-import Post from '../components/Post'
+import React, { useCallback, useEffect } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import { connect, useSelector } from "react-redux";
+import Header from "../components/Header";
+import Post from "../components/Post";
+import { firebase } from "../lib/firebaseConfig";
 
-class Feed extends Component {
- 
-  render(){
-    return (
-      <View style={StyleSheet.container}>
-        <Header/>
-        <FlatList
-        data={this.props.posts}
-        keyExtractor={item => `${item.id}`}
-        renderItem={({item}) =>
-        <Post key={item.id}{...item}/>} />
-      </View>
-    )
-  }
-}
+const Feed = () => {
+  const { posts } = useSelector((state) => state.posts) ?? [];
 
-const styles = StyleSheet.create ({
+  const loadPostsFromFirebase = useCallback(() => {
+    const postsRef = firebase.database().collection("posts");
+
+    console.log("ref posts agora", postsRef);
+  });
+
+  useEffect(() => {
+    loadPostsFromFirebase();
+  }, []);
+
+  return (
+    <View style={styles.container}>
+      <Header />
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => `${item.id}`}
+        renderItem={({ item }) => <Post key={item.id} {...item} />}
+      />
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  }
-})
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#F5FCFF",
+  },
+});
 
 //export default Feed
 
-const mapStateToProps = ({posts}) => {
+const mapStateToProps = ({ posts }) => {
   return {
-    posts: posts.posts
-  }
-}
+    posts: posts.posts,
+  };
+};
 
-export default connect(mapStateToProps)(Feed)
+export default connect(mapStateToProps)(Feed);

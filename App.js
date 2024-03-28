@@ -1,20 +1,21 @@
-import React from 'react'
-import { Provider } from 'react-redux'
-import { StyleSheet, SafeAreaView } from 'react-native'
-import { useFonts } from 'expo-font'
+import React from "react";
+import { SafeAreaView, StyleSheet } from "react-native";
+import { Provider } from "react-redux";
 
-import storeConfig from './src/store/storeConfig'
+import { useFonts } from "expo-font";
 
-import Navigator from './src/Navigator'
+import storeConfig from "./src/store/storeConfig";
+
+import Navigator from "./src/Navigator";
 
 export default function App() {
-  const store = storeConfig
+  const store = storeConfig;
 
   const [fontsLoaded] = useFonts({
-    shelter: require('./assets/fonts/shelter.otf')
-  })
+    shelter: require("./assets/fonts/shelter.otf"),
+  });
   if (!fontsLoaded) {
-    return null
+    return null;
   }
 
   return (
@@ -23,11 +24,11 @@ export default function App() {
         <Navigator />
       </SafeAreaView>
     </Provider>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
-    fontFamily: 'shelter'
-  }
-})
+    fontFamily: "shelter",
+  },
+});
