@@ -3,16 +3,24 @@ import { FlatList, StyleSheet, View } from "react-native";
 import { connect, useSelector } from "react-redux";
 import Header from "../components/Header";
 import Post from "../components/Post";
-import { firebase } from "../lib/firebaseConfig";
+
+import { db, onValue, push, ref } from "../lib/firebaseConfig";
 
 const Feed = () => {
   const { posts } = useSelector((state) => state.posts) ?? [];
 
-  const loadPostsFromFirebase = useCallback(() => {
-    const postsRef = firebase.database().collection("posts");
+  const addPostToFirebase = useCallback((item) => {
+    const reference = ref(db, "/posts");
+    push(reference, item);
+  }, []);
 
-    console.log("ref posts agora", postsRef);
-  });
+  const loadPostsFromFirebase = useCallback(() => {
+    const reference = ref(db, "/posts");
+    onValue(reference, (snapshot) => {
+      const data = snapshot.val();
+      console.log("posts", data);
+    });
+  }, []);
 
   useEffect(() => {
     loadPostsFromFirebase();

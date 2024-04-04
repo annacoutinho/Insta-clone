@@ -1,5 +1,5 @@
 import React from "react";
-import { SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native";
 import { Provider } from "react-redux";
 
 import { useFonts } from "expo-font";
@@ -26,9 +26,3 @@ export default function App() {
     </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    fontFamily: "shelter",
-  },
-});
