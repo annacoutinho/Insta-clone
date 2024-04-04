@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "681299450062",
+    "firebase_url": "https://instagram-f2446-default-rtdb.firebaseio.com",
+    "project_id": "instagram-f2446",
+    "storage_bucket": "instagram-f2446.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681299450062:android:ee794b216c0a58855dd89f",
+        "android_client_info": {
+          "package_name": "com.anna.insta"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZfGKy3XQEAwWup47s8cLKwQfnVUbIQqA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
