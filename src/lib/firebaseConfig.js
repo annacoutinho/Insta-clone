@@ -1,25 +1,18 @@
-import { initializeApp } from "firebase/app";
-import {
-  getDatabase,
-  onValue,
-  push,
-  ref,
-  set,
-  update,
-} from "firebase/database";
+import { initializeApp } from 'firebase/app'
+import { getDatabase, onValue, push, ref, set, update } from 'firebase/database'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCgDEmQc1fXbVX9zUGEIO73LBs7MH_ZTo0",
-  authDomain: "instagram-f2446.firebaseapp.com",
-  databaseURL: "https://instagram-f2446-default-rtdb.firebaseio.com/",
-  projectId: "instagram-f2446",
-  storageBucket: "instagram-f2446.appspot.com",
-  messagingSenderId: "681299450062",
-  appId: "1:681299450062:ios:4edf1d14758631ea5dd89f",
-};
+  apiKey: process.env.EXPO_PUBLIC_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_AUTH_DOMAIN,
+  databaseURL: process.env.EXPO_PUBLIC_DATABASE_URL,
+  projectId: process.env.EXPO_PUBLIC_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_STORAGE_BUCJET,
+  messagingSenderId: process.env.EXPO_PUBLIC_MESSAGING_SENDERID,
+  appId: process.env.EXPO_PUBLIC_APP_ID
+}
+console.log(firebaseConfig)
+const app = initializeApp(firebaseConfig)
 
-const app = initializeApp(firebaseConfig);
+const db = getDatabase(app)
 
-const db = getDatabase(app);
-
-export { app, db, onValue, push, ref, set, update };
+export { app, db, onValue, push, ref, set, update }
