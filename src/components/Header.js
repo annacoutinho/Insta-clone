@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Gravatar } from 'react-native-gravatar'
-import { StyleSheet, Text, View, Platform, Image } from 'react-native'
+import { StyleSheet, Text, View, Image } from 'react-native'
 import icon from '../../assets/imgs/icon.png'
 
 class Header extends Component {
