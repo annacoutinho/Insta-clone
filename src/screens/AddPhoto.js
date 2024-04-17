@@ -20,7 +20,8 @@ const noUser = 'Você precisa estar ogado para adicionar imagens'
 class AddPhoto extends Component {
   state = {
     image: null,
-    comment: ''
+    comment: '',
+    base64: null
   }
 
   pickImage = async () => {
@@ -34,21 +35,27 @@ class AddPhoto extends Component {
         alert('Desculpe, precisamos das permissões da câmera para prosseguir')
         return
       }
-
+ 
       const result = await ImagePicker.launchCameraAsync({
         mediaTypes: ImagePicker.MediaTypeOptions.All,
         allowsEditing: true,
         aspect: [4, 3],
-        quality: 1
+        quality: 1, 
+        base64: true
       })
-
+    console.log("teste", result)
       if (!result.cancelled) {
         const firstImageUri =
           result.assets && result.assets.length > 0
             ? result.assets[0].uri
             : null
         if (firstImageUri) {
-          this.setState({ image: { uri: firstImageUri } })
+          const newState = {
+            image : {uri: firstImageUri},
+            base64 : result.assets[0].base64
+          }
+          this.setState(newState)
+    
         } else {
           console.warn('Nenhuma imagem foi capturada.')
         }
@@ -67,7 +74,7 @@ class AddPhoto extends Component {
       id: Math.random(),
       nickname: this.props.name,
       email: this.props.email,
-      image: this.state.image,
+      image: this.state.base64,
       comments: [
         {
           nickname: this.props.name,
@@ -75,7 +82,7 @@ class AddPhoto extends Component {
         }
       ]
     })
-    this.setState({ image: null, comment: '' })
+    this.setState({ image: null, comment: '', base64:null })
     this.props.navigation.navigate('Feed')
   }
 
@@ -98,7 +105,7 @@ class AddPhoto extends Component {
             placeholder="Algum comentário para a foto?"
             style={styles.input}
             value={this.state.comment}
-            editable={this.props.name}
+            //editable={this.props.name}
             onChangeText={comment => this.setState({ comment })}
           />
           <TouchableOpacity
